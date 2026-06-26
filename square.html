@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Colooooors</title>
+</head>
+
+<body>
+  <div class="flex flex-col justify-center items-center h-screen">
+    <div id="square"
+      class="w-[300px] mb-10 aspect-square bg-slate-100 border border-2 rounded border-slate-400 flex justify-center items-center">
+      Hey
+    </div>
+    <div class="flex gap-4">
+      <div data-bg="bg-red-200" data-border="border-red-300"
+        class="rounded-full bg-red-200 w-[30px] aspect-square items-center flex justify-center border-2 border-red-300 cursor-pointer">
+      </div>
+      <div data-bg="bg-blue-200" data-border="border-blue-300"
+        class="rounded-full bg-blue-200 w-[30px] aspect-square items-center flex justify-center border-2 border-blue-300 cursor-pointer">
+      </div>
+      <div data-bg="bg-purple-200" data-border="border-purple-300"
+        class="rounded-full bg-purple-200 w-[30px] aspect-square items-center flex justify-center border-2 border-purple-300 cursor-pointer">
+      </div>
+      <div data-bg="bg-cyan-100" data-border="border-cyan-300"
+        class="rounded-full bg-cyan-200 w-[30px] aspect-square items-center flex justify-center border-2 border-cyan-300 cursor-pointer">
+      </div>
+      <div data-bg="bg-orange-200" data-border="border-orange-300"
+        class="rounded-full bg-orange-200 w-[30px] aspect-square items-center flex justify-center border-2 border-orange-300 cursor-pointer">
+      </div>
+      <div data-bg="bg-green-200" data-border="border-green-300"
+        class="rounded-full bg-green-200 w-[30px] aspect-square items-center flex justify-center border-2 border-green-300 cursor-pointer">
+      </div>
+    </div>
+  </div>
+  <script>
+    const circles = document.querySelectorAll('[data-bg]')
+    const square = document.getElementById('square')
+
+    circles.forEach(circle => {
+      const background = circle.dataset.bg
+      const border = circle.dataset.border
+      circle.addEventListener('mouseenter', (e) => {
+        square.classList.replace("bg-slate-100", background)
+        square.classList.replace("border-slate-400", border)
+
+      })
+      circle.addEventListener('mouseleave', () => {
+        square.classList.replace(background, "bg-slate-100")
+        square.classList.replace(border, "border-slate-400")
+      })
+    })
+  </script>
+</body>
+
+</html>
