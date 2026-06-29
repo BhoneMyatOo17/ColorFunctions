@@ -65,9 +65,9 @@
               Pin color
             </span>
           </div>
-          <div class="relative group inline-flex">
-            <div
-              class="text-slate-600 bg-slate-100 p-2 rounded-md cursor-pointer inline-flex hover:scale-110 active:scale-95 transition-all duration-200 active:bg-purple-200 active:text-purple-500">
+          <div class="relative group inline-flex" id="switch" onclick="toggleSwitchMode()">
+            <div id="switchbtn"
+              class="text-slate-600 bg-slate-100 p-2 rounded-md cursor-pointer inline-flex hover:scale-110 active:scale-95 transition-all duration-200">
               <i data-lucide="arrow-right-left"></i>
             </div>
             <span
@@ -114,7 +114,7 @@
         circle.classList.add('rounded-full', 'w-[30px]', 'aspect-square', 'cursor-pointer', 'circle', 'hover:scale-125', 'active:scale-95', 'transition-all', 'duration-200', 'relative')
         container.append(circle)
 
-        const bg = circle.dataset.hex
+        let bg = circle.dataset.hex
         const text = getTextColor(bg)
         circle.addEventListener('mouseenter', () => {
           square.style.backgroundColor = bg
@@ -145,8 +145,17 @@
             pin.style.color = text
             square.innerText = "Color Pinned!"
             togglePinMode()
-          } else {
-
+          } else if (isSwiched) {
+            const newColor = randomHex()
+            circle.style.backgroundColor = newColor
+            circle.dataset.hex = newColor
+            bg = newColor
+            square.style.backgroundColor = newColor
+            square.innerText = newColor
+            square.style.color = getTextColor(newColor)
+            toggleSwitchMode()
+          }
+          else {
             navigator.clipboard.writeText(bg).then(() => {
               square.innerText = "Copied!"
             })
@@ -161,7 +170,7 @@
       const palette = document.getElementById('palettes')
       paletteCount++
       const container = document.createElement('div')
-      container.classList.add('flex', 'flex-col')
+      container.classList.add('flex', 'flex-col', 'relative')
       palette.appendChild(container)
       const label = document.createElement('label')
       label.classList.add('text-center')
@@ -175,12 +184,22 @@
         const bg = circle.dataset.hex
         const text = getTextColor(bg)
         const swatch = document.createElement('div')
-        swatch.classList.add('h-[100px]', 'w-[30px]', '[writing-mode:vertical-rl]', 'rotate-180', 'self-center', 'text-center')
+        swatch.classList.add('h-[100px]', 'w-[30px]', '[writing-mode:vertical-rl]', 'rotate-180', 'self-center', 'text-center', 'cursor-pointer')
         swatch.style.backgroundColor = bg
         swatch.innerText = bg
         swatch.style.color = text
         container2.appendChild(swatch)
       })
+      const del = document.createElement('button')
+      del.classList.add('absolute', 'top-0', 'right-0', 'mt-[-5px]', 'px-2', 'border-2', 'border-slate-400', 'rounded-lg', 'bg-slate-100', 'hover:scale-105', 'active:scale-95')
+      del.innerText = "X"
+      container2.appendChild(del)
+      del.addEventListener('click', () => {
+        if (confirm('Delete this Palette?')) {
+          container.remove()
+        }
+      })
+
     }
 
     function newPalette() {
@@ -244,6 +263,26 @@
       } else {
         pinbtn.classList.remove('text-red-600', 'bg-red-100')
         pinbtn.classList.add('text-slate-600', 'bg-slate-100')
+        circles.forEach(circle => {
+          circle.classList.remove('circle-pulse')
+        })
+      }
+    }
+    function toggleSwitchMode() {
+      const swi = document.getElementById('switch')
+      const circles = document.querySelectorAll('.circle')
+      const swibtn = document.getElementById('switchbtn')
+      isSwiched = !isSwiched
+
+      if (isSwiched) {
+        swibtn.classList.remove('text-slate-600', 'bg-slate-100')
+        swibtn.classList.add('text-purple-600', 'bg-purple-100')
+        circles.forEach(circle => {
+          circle.classList.add('circle-pulse')
+        })
+      } else {
+        swibtn.classList.remove('text-red-600', 'bg-red-100')
+        swibtn.classList.add('text-slate-600', 'bg-slate-100')
         circles.forEach(circle => {
           circle.classList.remove('circle-pulse')
         })
