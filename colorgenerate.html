@@ -29,6 +29,9 @@
 <body>
   <div class="h-screen flex flex-row overflow-hidden">
     <div class="flex flex-col justify-center items-center w-1/2">
+      <h1 class="text-2xl ml-[-45px] text-slate-800 font-medium mb-1 text-center self-stretch">Random Color Palette
+        Generator</h1>
+      <label class="ml-[-45px] mb-8 text-sm text-slate-500">generate random palette for new ideas</label>
       <div class="flex flex-row gap-4 items-center">
 
         <div class="flex flex-col items-center">
@@ -80,7 +83,7 @@
       </div>
     </div>
 
-    <div class="w-1/2">
+    <div class="w-1/2 border-l-3 border-slate-400">
       <label class="block w-full text-center p-6 text-xl font-medium">Your Saved Palettes will appear here</label>
       <div id="palettes" class="p-4 flex gap-8 flex-wrap">
       </div>
@@ -170,33 +173,34 @@
       const palette = document.getElementById('palettes')
       paletteCount++
       const container = document.createElement('div')
-      container.classList.add('flex', 'flex-col', 'relative')
+      container.classList.add('flex', 'flex-col', 'relative', 'group')
       palette.appendChild(container)
       const label = document.createElement('label')
-      label.classList.add('text-center')
+      label.classList.add('text-xs', 'text-slate-800', 'tracking-widest', 'uppercase', 'mb-1', 'pl-1')
       container.appendChild(label)
       label.innerText = "Palette " + paletteCount
       const container2 = document.createElement('div')
-      container2.classList.add('flex', 'flex-row')
+      container2.classList.add('flex', 'flex-row', 'rounded-md', 'overflow-hidden')
       container.appendChild(container2)
       const circles = document.querySelectorAll('.circle')
       circles.forEach(circle => {
         const bg = circle.dataset.hex
         const text = getTextColor(bg)
         const swatch = document.createElement('div')
-        swatch.classList.add('h-[100px]', 'w-[30px]', '[writing-mode:vertical-rl]', 'rotate-180', 'self-center', 'text-center', 'cursor-pointer')
+        swatch.classList.add('h-[120px]', 'w-[33px]', 'tracking-widest', 'text-sm', 'p-2', '[writing-mode:vertical-rl]', 'rotate-180', 'self-center', 'text-center', 'cursor-pointer')
         swatch.style.backgroundColor = bg
         swatch.innerText = bg
         swatch.style.color = text
         container2.appendChild(swatch)
       })
       const del = document.createElement('button')
-      del.classList.add('absolute', 'top-0', 'right-0', 'mt-[-5px]', 'px-2', 'border-2', 'border-slate-400', 'rounded-lg', 'bg-slate-100', 'hover:scale-105', 'active:scale-95')
-      del.innerText = "X"
+      del.classList.add('absolute', 'top-0', 'right-0', 'mt-[-10px]', 'text-slate-400', 'opacity-0', 'group-hover:opacity-100', 'transition-opacity', 'text-2xl', 'cursor-pointer', 'hover:text-red-400')
+      del.innerText = '×'
       container2.appendChild(del)
       del.addEventListener('click', () => {
         if (confirm('Delete this Palette?')) {
           container.remove()
+          paletteCount--
         }
       })
 
@@ -231,6 +235,8 @@
 
       })
       pinned.length = 0
+      if (isPinned) togglePinMode()
+      if (isSwiched) toggleSwitchMode()
     }
 
     function getTextColor(hex) {
@@ -281,7 +287,7 @@
           circle.classList.add('circle-pulse')
         })
       } else {
-        swibtn.classList.remove('text-red-600', 'bg-red-100')
+        swibtn.classList.remove('text-purple-600', 'bg-purple-100')
         swibtn.classList.add('text-slate-600', 'bg-slate-100')
         circles.forEach(circle => {
           circle.classList.remove('circle-pulse')

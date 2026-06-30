@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzzzz</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* From Uiverse.io by cssbuttons-io */
+    .duobtn {
+      appearance: button;
+      background-color: #adadad;
+      border: solid transparent;
+      border-radius: 16px;
+      border-width: 0 0 4px;
+      box-sizing: border-box;
+      color: #333333;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      line-height: 20px;
+      margin: 0;
+      outline: none;
+      overflow: visible;
+      padding: 13px 19px;
+      text-align: center;
+      text-transform: uppercase;
+      touch-action: manipulation;
+      transform: translateZ(0);
+      transition: filter .2s;
+      user-select: none;
+      -webkit-user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .duobtn:after {
+      background-clip: padding-box;
+      background-color: #e6e6e6;
+      border: solid transparent;
+      border-radius: 16px;
+      border-width: 0 0 4px;
+      bottom: -4px;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    .duobtn:main,
+    .duobtn:focus {
+      user-select: auto;
+    }
+
+    .duobtn:hover:not(:disabled) {
+      filter: brightness(0.9);
+    }
+
+    .duobtn:disabled {
+      cursor: auto;
+    }
+
+    .duobtn:active:after {
+      border-width: 0 0 0px;
+    }
+
+    .duobtn:active {
+      padding-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body class="h-screen overflow-hidden w-full flex justify-center">
+  <div
+    class="w-4xl my-15 bg-slate-100 flex justify-center items-center flex-col rounded-4xl shadow-xl border-4 border-slate-200">
+    <div class="mb-25 text-4xl font-medium text-slate-800">Give me a color that starts with the letter M</div>
+    <div class="w-full flex justify-center gap-4">
+      <button class="duobtn m-6 min-w-[120px]">Mlue</button>
+      <button class="duobtn m-6 min-w-[120px]">Magenta</button>
+      <button class="duobtn m-6 min-w-[120px]">Mpurple</button>
+      <button class="duobtn m-6 min-w-[120px]">Mark</button>
+    </div>
+
+</body>
+
+</html>
